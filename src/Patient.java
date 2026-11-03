@@ -1,4 +1,3 @@
-
 public class Patient implements Runnable {
 
     private final int id;
