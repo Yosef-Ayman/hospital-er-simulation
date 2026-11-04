@@ -79,6 +79,8 @@ public class Hospital {
         for (Thread doctorThread : doctorThreads) {
             doctorThread.join();
         }
+        System.out.println("All patients have been treated."); 
+        System.out.println("Simulation completed.");    
 
         scanner.close();
     }

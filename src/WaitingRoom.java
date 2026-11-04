@@ -25,6 +25,7 @@ public class WaitingRoom {
 
     public void addPatient(Patient patient) {
         mutex.acquire();
+         System.out.println("P" + patient.getPatientId() + " arrived.");
         if (closed) {
             mutex.release();
             throw new IllegalStateException("Waiting room is closed");
@@ -43,7 +44,7 @@ public class WaitingRoom {
         }
     }
 
-    public Patient getPatient() {
+    public Patient getPatient(int doctorId) {
         full.acquire();                     
         mutex.acquire();
 
@@ -52,6 +53,7 @@ public class WaitingRoom {
             return null;
         }
         Patient patient = waitingPatients.remove();
+        System.out.println("Doctor " + doctorId + " is assigned to P" + patient.getPatientId());
         admitNextPatient();         
         mutex.release();
         return patient;

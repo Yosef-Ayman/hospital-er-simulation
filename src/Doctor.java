@@ -19,12 +19,11 @@ class Doctor implements Runnable {
     @Override
     public void run() {
         while (true) {
-            Patient patient = waitingRoom.getPatient();
+            Patient patient = waitingRoom.getPatient(id);
             if (patient == null) 
             {
                 break;
             }
-            System.out.println("Doctor " + id + " is assigned to P" + patient.getPatientId());
             System.out.println("Doctor " + id + " is trying to acquire a treatment room");
             boolean acquired;
             try 
@@ -56,8 +55,8 @@ class Doctor implements Runnable {
                 Thread.currentThread().interrupt();
             }
             System.out.println("Doctor " + id + " finished treating P" + patient.getPatientId());
-            treatmentRooms.release();
             System.out.println("Doctor " + id + " released the treatment room");
+            treatmentRooms.release();
             System.out.println("Doctor " + id + " is now available");
             System.out.println("P" + patient.getPatientId() + " left");
             completedPatients.release();

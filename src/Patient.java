@@ -23,7 +23,6 @@ public class Patient implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("P" + id + " arrived.");
         waitingRoom.addPatient(this);
     }
 }
